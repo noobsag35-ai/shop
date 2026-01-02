@@ -1,117 +1,93 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-<meta charset="UTF-8">
-<title>فروشگاه من</title>
+  <meta charset="UTF-8">
+  <title>Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body {
-  margin: 0;
-  font-family: sans-serif;
-  background: #f2f2f2;
-}
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-/* صفحه انتخاب */
-#selectMode {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+    .container {
+      text-align: center;
+    }
 
-#selectMode img {
-  width: 140px;
-  margin-bottom: 30px;
-}
+    img {
+      width: 140px;
+      margin-bottom: 30px;
+    }
 
-.buttons {
-  display: flex;
-  gap: 15px;
-}
+    .buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
 
-.buttons button {
-  padding: 12px 25px;
-  font-size: 16px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  background: #000;
-  color: #fff;
-}
+    button {
+      padding: 12px 25px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
 
-/* حالت سایت */
-#site {
-  display: none;
-  padding: 20px;
-}
+    .pc {
+      background: #007bff;
+      color: white;
+    }
 
-/* حالت کامپیوتر */
-.desktop .product {
-  max-width: 900px;
-  margin: auto;
-}
+    .android {
+      background: #28a745;
+      color: white;
+    }
 
-/* حالت اندروید */
-.mobile .product {
-  max-width: 100%;
-}
+    /* حالت موبایل */
+    body.android-mode {
+      background: #e8f5e9;
+    }
 
-.product {
-  background: #fff;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 10px;
-}
-</style>
+    /* حالت کامپیوتر */
+    body.pc-mode {
+      background: #e3f2fd;
+    }
+  </style>
 </head>
 
 <body>
+  <div class="container">
+    <img src="logo.png" alt="Logo">
 
-<!-- انتخاب دستگاه -->
-<div id="selectMode">
-  <img src="logo.png" alt="logo">
-  <div class="buttons">
-    <button onclick="setMode('desktop')">💻 کامپیوتر</button>
-    <button onclick="setMode('mobile')">📱 اندروید</button>
-  </div>
-</div>
-
-<!-- سایت -->
-<div id="site">
-  <h2>محصولات</h2>
-
-  <div class="product">
-    <h3>محصول ۱</h3>
-    <p>قیمت: 100,000 تومان</p>
+    <div class="buttons">
+      <button class="pc" onclick="setMode('pc')">💻 کامپیوتر</button>
+      <button class="android" onclick="setMode('android')">📱 اندروید</button>
+    </div>
   </div>
 
-  <div class="product">
-    <h3>محصول ۲</h3>
-    <p>قیمت: 250,000 تومان</p>
-  </div>
-</div>
+  <script>
+    function setMode(mode) {
+      localStorage.setItem('mode', mode);
+      applyMode();
+    }
 
-<script>
-function setMode(mode) {
-  localStorage.setItem("mode", mode);
-  loadSite();
-}
+    function applyMode() {
+      document.body.classList.remove('pc-mode', 'android-mode');
+      const mode = localStorage.getItem('mode');
+      if (mode === 'pc') {
+        document.body.classList.add('pc-mode');
+      } else if (mode === 'android') {
+        document.body.classList.add('android-mode');
+      }
+    }
 
-function loadSite() {
-  const mode = localStorage.getItem("mode");
-  if (!mode) return;
-
-  document.getElementById("selectMode").style.display = "none";
-  const site = document.getElementById("site");
-  site.style.display = "block";
-
-  document.body.classList.remove("desktop", "mobile");
-  document.body.classList.add(mode);
-}
-
-loadSite();
-</script>
-
+    applyMode();
+  </script>
 </body>
-  </html>
+</html>
