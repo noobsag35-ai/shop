@@ -1,93 +1,198 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-  <meta charset="UTF-8">
-  <title>Shop</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>XB Shop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: sans-serif;
-      background: #f5f5f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;700&display=swap');
 
-    .container {
-      text-align: center;
-    }
+* {
+  box-sizing: border-box;
+  font-family: 'Vazirmatn', sans-serif;
+}
 
-    img {
-      width: 140px;
-      margin-bottom: 30px;
-    }
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+}
 
-    .buttons {
-      display: flex;
-      gap: 15px;
-      justify-content: center;
-    }
+/* ===== HEADER ===== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.08);
+}
 
-    button {
-      padding: 12px 25px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
+.header-left {
+  font-size: 18px;
+  font-weight: 500;
+}
 
-    .pc {
-      background: #007bff;
-      color: white;
-    }
+.header-right {
+  font-size: 18px;
+  font-weight: 700;
+}
 
-    .android {
-      background: #28a745;
-      color: white;
-    }
+/* ===== LANDING ===== */
+.landing {
+  height: calc(100vh - 70px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    /* حالت موبایل */
-    body.android-mode {
-      background: #e8f5e9;
-    }
+.container {
+  text-align: center;
+}
 
-    /* حالت کامپیوتر */
-    body.pc-mode {
-      background: #e3f2fd;
-    }
-  </style>
+.container img {
+  width: 160px;
+  margin-bottom: 35px;
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+button {
+  padding: 14px 30px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.pc {
+  background: #2196f3;
+  color: white;
+}
+
+.android {
+  background: #4caf50;
+  color: white;
+}
+
+button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* ===== SHOP ===== */
+.shop {
+  display: none;
+  padding: 40px 20px;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap: 25px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.product {
+  background: rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  backdrop-filter: blur(8px);
+}
+
+.product img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.product h3 {
+  margin: 10px 0;
+}
+
+.price {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.buy {
+  margin-top: 12px;
+  background: #ff9800;
+  color: black;
+}
+
+/* ===== MODE COLORS ===== */
+body.pc-mode {
+  background: linear-gradient(135deg, #141e30, #243b55);
+}
+
+body.android-mode {
+  background: linear-gradient(135deg, #0f9b0f, #000000);
+}
+</style>
 </head>
 
 <body>
+
+<header>
+  <div class="header-left">ایکسبی شاپ</div>
+  <div class="header-right">XB FAMILY SHOP</div>
+</header>
+
+<!-- LANDING -->
+<section class="landing" id="landing">
   <div class="container">
     <img src="logo.png" alt="Logo">
 
     <div class="buttons">
-      <button class="pc" onclick="setMode('pc')">💻 کامپیوتر</button>
-      <button class="android" onclick="setMode('android')">📱 اندروید</button>
+      <button class="pc" onclick="enterShop('pc')">💻 کامپیوتر</button>
+      <button class="android" onclick="enterShop('android')">📱 اندروید</button>
     </div>
   </div>
+</section>
 
-  <script>
-    function setMode(mode) {
-      localStorage.setItem('mode', mode);
-      applyMode();
-    }
+<!-- SHOP -->
+<section class="shop" id="shop">
+  <div class="products">
 
-    function applyMode() {
-      document.body.classList.remove('pc-mode', 'android-mode');
-      const mode = localStorage.getItem('mode');
-      if (mode === 'pc') {
-        document.body.classList.add('pc-mode');
-      } else if (mode === 'android') {
-        document.body.classList.add('android-mode');
-      }
-    }
+    <div class="product">
+      <img src="https://picsum.photos/400/300?1">
+      <h3>اکانت VIP گیم</h3>
+      <div class="price">250,000 تومان</div>
+      <button class="buy">خرید</button>
+    </div>
 
-    applyMode();
-  </script>
+    <div class="product">
+      <img src="https://picsum.photos/400/300?2">
+      <h3>اشتراک پریمیوم</h3>
+      <div class="price">180,000 تومان</div>
+      <button class="buy">خرید</button>
+    </div>
+
+  </div>
+</section>
+
+<script>
+function enterShop(mode) {
+  localStorage.setItem('mode', mode);
+  document.body.classList.add(mode + '-mode');
+  document.getElementById('landing').style.display = 'none';
+  document.getElementById('shop').style.display = 'block';
+}
+
+const savedMode = localStorage.getItem('mode');
+if (savedMode) {
+  enterShop(savedMode);
+}
+</script>
+
 </body>
 </html>
